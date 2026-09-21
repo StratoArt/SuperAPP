@@ -1,40 +1,3381 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#003b5c">
 <title>Demoplot Management System</title>
+
 <style>
-:root{--navy:#003b5c;--blue:#0072ce;--green:#19a974;--orange:#f59e0b;--red:#e53935;--bg:#f4f7fa;--line:#e3e9ee;--muted:#6c7f91}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#17324d;font:14px Arial,sans-serif}button,input,select,textarea{font:inherit}
-.sidebar{position:fixed;inset:0 auto 0 0;width:235px;background:linear-gradient(#003b5c,#002b45);color:#fff;padding:24px 14px}.brand{font-size:20px;font-weight:800;padding:10px 12px 28px;border-bottom:1px solid #fff2}.brand small{display:block;font-size:11px;opacity:.65;margin-top:7px}
-.nav button{width:100%;display:block;text-align:left;background:transparent;border:0;color:#dceaf3;padding:13px 14px;border-radius:9px;margin:5px 0}.nav button.active,.nav button:hover{background:#0072ce;color:#fff}
-main{margin-left:235px}.hero{padding:24px 32px 30px;background:linear-gradient(110deg,#003b5c,#0067a4,#198d80);color:#fff}.top{display:flex;gap:10px}.search{flex:1;max-width:600px;border:0;border-radius:8px;padding:12px}.hero h1{font-size:31px;margin:27px 0 4px}.hero p{margin:0;opacity:.8}
-.content{padding:22px 28px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.kpi,.card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 8px 24px #003b5c14}.kpi{border-left:5px solid var(--blue)}.kpi.g{border-color:var(--green)}.kpi.o{border-color:var(--orange)}.kpi.r{border-color:var(--red)}.label{font-size:12px;color:var(--muted);font-weight:700}.num{font-size:30px;font-weight:800;margin-top:6px}
-.grid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-top:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}.bars{height:210px;display:flex;align-items:end;gap:24px;padding:15px}.barbox{flex:1;height:100%;display:flex;align-items:end;justify-content:center;gap:5px}.bar{width:25px;border-radius:5px 5px 0 0;position:relative}.bar span{position:absolute;top:-17px;font-size:11px;font-weight:bold}.plannedbar{background:#a9bdd0}.execbar{background:var(--green)}.progbar{background:var(--orange)}.month{text-align:center;color:var(--muted);font-size:12px}
-.dflex{display:flex;align-items:center;gap:24px}.donut{width:145px;height:145px;border-radius:50%;position:relative}.donut:after{content:"";position:absolute;inset:33px;background:#fff;border-radius:50%}.donut b{position:absolute;inset:0;display:grid;place-items:center;z-index:2;font-size:24px}.rank{margin:9px 0}.rh{display:flex;justify-content:space-between;font-size:12px}.track{height:7px;background:#e9eef2;border-radius:8px}.fill{height:100%;background:var(--blue);border-radius:8px}
-.table{margin-top:16px}.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.input,select{padding:9px;border:1px solid var(--line);border-radius:7px;background:#fff}button.primary{padding:9px 13px;border:0;border-radius:7px;background:var(--blue);color:#fff;font-weight:bold}
-.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:11px;border-bottom:1px solid #edf1f4;text-align:left;white-space:nowrap}th{background:#f3f6f8;color:#516879}.pill{padding:4px 8px;border-radius:15px;font-size:11px;font-weight:bold;background:#dff3e5}.pill.pl{background:#fde2e2;color:#bd2525}.pill.pr{background:#fff0d6;color:#9a6100}
-@media(max-width:900px){.sidebar{display:none}main{margin:0}.kpis{grid-template-columns:1fr 1fr}.grid,.grid3{grid-template-columns:1fr}.content{padding:14px}.hero{padding:18px}.hero h1{font-size:25px}}
-</style></head>
+:root{
+  --navy:#003b5c;
+  --navy2:#002b45;
+  --blue:#0072ce;
+  --cyan:#00a6d6;
+  --green:#19a974;
+  --orange:#f59e0b;
+  --red:#e53935;
+  --bg:#f3f7fa;
+  --card:#fff;
+  --line:#e2e9ee;
+  --muted:#718391;
+  --text:#17324d;
+  --shadow:0 8px 28px rgba(0,59,92,.08);
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:14px Inter,Arial,sans-serif;
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+  position:fixed;
+  inset:0 auto 0 0;
+  width:238px;
+  background:linear-gradient(180deg,var(--navy),var(--navy2));
+  color:#fff;
+  padding:18px 13px;
+  z-index:20;
+}
+
+.brand{
+  padding:12px 13px 22px;
+  font-size:21px;
+  font-weight:900;
+  line-height:1.05;
+  border-bottom:1px solid #ffffff1c;
+}
+
+.brand small{
+  display:block;
+  font-size:10px;
+  font-weight:500;
+  line-height:1.45;
+  opacity:.65;
+  margin-top:8px;
+}
+
+.nav{
+  margin-top:16px;
+}
+
+.nav button{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#dceaf3;
+  text-align:left;
+  padding:12px 13px;
+  border-radius:9px;
+  margin:3px 0;
+}
+
+.nav button:hover,
+.nav button.active{
+  background:var(--blue);
+  color:#fff;
+}
+
+.side-note{
+  position:absolute;
+  bottom:20px;
+  left:26px;
+  right:20px;
+  font-size:10px;
+  line-height:1.5;
+  color:#b9d0dc;
+  opacity:.7;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  margin-left:238px;
+  min-height:100vh;
+}
+
+.hero{
+  padding:22px 30px 28px;
+  background:
+    linear-gradient(
+      112deg,
+      #003b5c 0%,
+      #0068a6 60%,
+      #168d80 100%
+    );
+  color:#fff;
+}
+
+.hero-top{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.searchbox{
+  flex:1;
+  max-width:650px;
+  position:relative;
+}
+
+.searchbox input{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  padding:12px 14px 12px 38px;
+  outline:0;
+  background:#ffffffef;
+  color:var(--text);
+}
+
+.search-icon{
+  position:absolute;
+  left:13px;
+  top:10px;
+  color:#6d8492;
+}
+
+.period{
+  border:0;
+  border-radius:10px;
+  padding:11px 13px;
+  background:#ffffff18;
+  color:#fff;
+}
+
+.period option{
+  color:var(--text);
+}
+
+.hero h1{
+  font-size:30px;
+  margin:26px 0 4px;
+}
+
+.hero p{
+  margin:0;
+  opacity:.78;
+}
+
+.content{
+  padding:20px 28px 36px;
+}
+
+/* =========================
+   KPI
+========================= */
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.kpi{
+  background:var(--card);
+  border-radius:13px;
+  padding:17px 18px;
+  box-shadow:var(--shadow);
+  border-top:4px solid var(--blue);
+}
+
+.kpi.green{
+  border-color:var(--green);
+}
+
+.kpi.orange{
+  border-color:var(--orange);
+}
+
+.kpi.red{
+  border-color:var(--red);
+}
+
+.kpi .label{
+  font-size:11px;
+  color:var(--muted);
+  font-weight:800;
+  letter-spacing:.03em;
+}
+
+.kpi .num{
+  font-size:30px;
+  font-weight:900;
+  margin-top:6px;
+}
+
+.kpi .sub{
+  font-size:11px;
+  color:#8a9aa4;
+  margin-top:3px;
+}
+
+/* =========================
+   DASHBOARD CARDS
+========================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:1.45fr 1fr;
+  gap:15px;
+  margin-top:15px;
+}
+
+.grid3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:15px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:13px;
+  padding:17px;
+  box-shadow:var(--shadow);
+}
+
+.card h3{
+  margin:0 0 14px;
+  font-size:15px;
+}
+
+/* =========================
+   BAR CHART
+========================= */
+
+.bars{
+  height:205px;
+  display:flex;
+  align-items:flex-end;
+  gap:24px;
+  padding:12px 12px 0;
+}
+
+.barcol{
+  flex:1;
+  height:100%;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:5px;
+}
+
+.bar{
+  width:24px;
+  min-height:2px;
+  border-radius:5px 5px 0 0;
+  position:relative;
+}
+
+.bar span{
+  position:absolute;
+  top:-17px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:10px;
+  font-weight:800;
+}
+
+.planned{
+  background:#a9bdd0;
+}
+
+.executed{
+  background:var(--green);
+}
+
+.progress{
+  background:var(--orange);
+}
+
+.month{
+  text-align:center;
+  font-size:11px;
+  color:var(--muted);
+  margin-top:7px;
+}
+
+.legendline{
+  font-size:12px;
+  line-height:2.1;
+}
+
+.dot{
+  display:inline-block;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  margin-right:7px;
+}
+
+/* =========================
+   DONUT
+========================= */
+
+.donutwrap{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+
+.donut{
+  width:142px;
+  height:142px;
+  border-radius:50%;
+  position:relative;
+  flex:none;
+}
+
+.donut:after{
+  content:"";
+  position:absolute;
+  inset:31px;
+  background:#fff;
+  border-radius:50%;
+}
+
+.donut b{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  z-index:2;
+  font-size:23px;
+}
+
+/* =========================
+   RANKING
+========================= */
+
+.rank{
+  margin:10px 0;
+}
+
+.rankhead{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.track{
+  height:7px;
+  background:#edf2f5;
+  border-radius:9px;
+  overflow:hidden;
+}
+
+.fill{
+  height:100%;
+  background:var(--blue);
+  border-radius:9px;
+}
+
+/* =========================
+   LIST
+========================= */
+
+.listcard{
+  margin-top:15px;
+}
+
+.tools{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+
+.tools .filter{
+  padding:9px 10px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+  color:var(--text);
+}
+
+.tools .spacer{
+  flex:1;
+}
+
+.primary,
+.secondary{
+  border-radius:8px;
+  padding:9px 12px;
+  font-weight:800;
+}
+
+.primary{
+  border:0;
+  background:var(--blue);
+  color:#fff;
+}
+
+.secondary{
+  border:1px solid #d6e0e6;
+  background:#fff;
+  color:#38566a;
+}
+
+.primary:hover{
+  filter:brightness(.95);
+}
+
+.tablewrap{
+  overflow:auto;
+  border:1px solid #edf1f4;
+  border-radius:10px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
+}
+
+th,
+td{
+  padding:11px 12px;
+  border-bottom:1px solid #edf1f4;
+  text-align:left;
+  white-space:nowrap;
+}
+
+th{
+  background:#f6f8fa;
+  color:#607482;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  position:sticky;
+  top:0;
+}
+
+tr:last-child td{
+  border-bottom:0;
+}
+
+.row{
+  cursor:pointer;
+}
+
+.row:hover{
+  background:#f7fbfd;
+}
+
+.code{
+  font-weight:900;
+  color:#0065a3;
+}
+
+.muted{
+  color:#84939d;
+}
+
+.pill{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:900;
+}
+
+.plannedpill{
+  background:#fde7e7;
+  color:#bb3030;
+}
+
+.progpill{
+  background:#fff1d8;
+  color:#9a6100;
+}
+
+.execpill{
+  background:#def4e6;
+  color:#187a4e;
+}
+
+.cancelpill{
+  background:#edf0f2;
+  color:#66757e;
+}
+
+.action{
+  border:0;
+  background:#e8f2f8;
+  color:#0065a3;
+  border-radius:7px;
+  padding:6px 9px;
+  font-weight:800;
+}
+
+.empty{
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+}
+
+.mobilecards{
+  display:none;
+}
+
+.countnote{
+  font-size:11px;
+  color:var(--muted);
+  margin-left:3px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,27,43,.55);
+  z-index:60;
+}
+
+.overlay.show{
+  display:flex;
+}
+
+.panel{
+  background:#fff;
+  margin:auto;
+  width:min(960px,94vw);
+  max-height:92vh;
+  border-radius:17px;
+  overflow:hidden;
+  box-shadow:0 25px 90px rgba(0,20,35,.35);
+  display:flex;
+  flex-direction:column;
+}
+
+.panelhead{
+  padding:16px 20px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.paneltitle{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.paneltitle h2{
+  font-size:18px;
+  margin:0;
+}
+
+.paneltitle small{
+  display:block;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.close{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:50%;
+  background:#edf2f5;
+  color:#345364;
+  font-size:18px;
+}
+
+.panelbody{
+  padding:20px;
+  overflow:auto;
+}
+
+.detailhero{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:14px;
+}
+
+.infohero{
+  padding:17px;
+  border-radius:13px;
+  background:linear-gradient(135deg,#003b5c,#0072ce);
+  color:#fff;
+}
+
+.infohero .big{
+  font-size:25px;
+  font-weight:900;
+}
+
+.infohero .meta{
+  margin-top:7px;
+  opacity:.82;
+  font-size:12px;
+}
+
+.infohero .chips{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:13px;
+}
+
+.chip{
+  background:#ffffff1c;
+  border:1px solid #ffffff2c;
+  border-radius:20px;
+  padding:5px 8px;
+  font-size:10px;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.sumitem{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+
+.sumitem label{
+  display:block;
+  font-size:9px;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+.sumitem b{
+  font-size:13px;
+}
+
+.sectiontitle{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:#58707e;
+  font-weight:900;
+  margin:20px 0 10px;
+}
+
+.detailgrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.detailitem{
+  padding:11px;
+  background:#f7f9fa;
+  border-radius:9px;
+}
+
+.detailitem label{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  text-transform:uppercase;
+  font-weight:900;
+  margin-bottom:4px;
+}
+
+.detailitem b{
+  font-size:12px;
+  word-break:break-word;
+}
+
+.panelfoot{
+  padding:13px 20px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.formgrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  font-size:10px;
+  text-transform:uppercase;
+  color:#607482;
+  font-weight:900;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:10px 11px;
+  border:1px solid #d7e1e7;
+  border-radius:8px;
+  background:#fff;
+  outline:0;
+}
+
+.field textarea{
+  min-height:82px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px #0072ce18;
+}
+
+.locked{
+  background:#eef3f6!important;
+  color:#667a86!important;
+}
+
+.locknote{
+  font-size:10px;
+  color:#82939c;
+}
+
+.url{
+  color:#0072ce;
+  text-decoration:none;
+  font-weight:800;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  background:#003b5c;
+  color:#fff;
+  padding:12px 15px;
+  border-radius:9px;
+  box-shadow:0 8px 30px #00182855;
+  z-index:100;
+  display:none;
+}
+
+.toast.show{
+  display:block;
+}
+
+.loading{
+  opacity:.6;
+  pointer-events:none;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:1000px){
+
+  .sidebar{
+    display:none;
+  }
+
+  main{
+    margin-left:0;
+  }
+
+  .kpis{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid,
+  .grid3{
+    grid-template-columns:1fr;
+  }
+
+  .content{
+    padding:15px;
+  }
+
+  .hero{
+    padding:17px;
+  }
+
+  .hero h1{
+    font-size:25px;
+  }
+}
+
+@media(max-width:700px){
+
+  .hero-top{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .period{
+    width:100%;
+  }
+
+  .kpis{
+    gap:9px;
+  }
+
+  .kpi{
+    padding:14px;
+  }
+
+  .kpi .num{
+    font-size:25px;
+  }
+
+  .grid3{
+    gap:9px;
+  }
+
+  .tablewrap{
+    display:none;
+  }
+
+  .mobilecards{
+    display:block;
+  }
+
+  .demo-card{
+    background:#fff;
+    border:1px solid #e7edf1;
+    border-radius:12px;
+    padding:13px;
+    margin-bottom:8px;
+  }
+
+  .demo-top{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+  }
+
+  .demo-name{
+    font-weight:900;
+    color:#0065a3;
+  }
+
+  .demo-product{
+    font-size:12px;
+    margin-top:3px;
+  }
+
+  .demo-meta{
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.7;
+    margin-top:8px;
+  }
+
+  .demo-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:9px;
+  }
+
+  .detailhero{
+    grid-template-columns:1fr;
+  }
+
+  .summary{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .detailgrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .panel{
+    width:100%;
+    height:100%;
+    max-height:none;
+    border-radius:0;
+  }
+
+  .panelbody{
+    padding:15px;
+  }
+
+  .panelhead{
+    padding:13px 15px;
+  }
+
+  .formgrid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .panelfoot{
+    padding:12px 15px;
+  }
+
+  .bars{
+    gap:10px;
+  }
+}
+</style>
+</head>
+
 <body>
-<aside class="sidebar"><div class="brand">BAYER<br>Demoplot<small>Management System<br>Real Field Data. Real Impact.</small></div><div class="nav"><button class="active">⌂ Dashboard</button><button onclick="list.scrollIntoView({behavior:'smooth'})">▦ Demoplot List</button><button onclick="addDemo()">＋ Add Demoplot</button><button>⌖ Map View</button><button>▣ Photo Gallery</button></div></aside>
-<main><header class="hero"><div class="top"><input id="search" class="search" placeholder="Cari demoplot, petani, produk, lokasi..." oninput="renderTable()"><select><option>Q3 2026 (Jul-Sep)</option></select></div><h1>Demoplot Dashboard</h1><p>Real Field Data. Real Impact.</p></header>
-<section class="content"><div class="kpis">
-<div class="kpi"><div class="label">TOTAL DEMOPLOT Q3 2026</div><div id="total" class="num">—</div></div><div class="kpi g"><div class="label">EXECUTED</div><div id="executed" class="num">—</div></div><div class="kpi o"><div class="label">ON PROGRESS</div><div id="progress" class="num">—</div></div><div class="kpi r"><div class="label">OUTSTANDING</div><div id="outstanding" class="num">—</div></div></div>
-<div class="grid"><div class="card"><h3>Trend Eksekusi Q3 2026</h3><div id="bars" class="bars"></div></div><div class="card"><h3>Demoplot by Status</h3><div class="dflex"><div id="donut" class="donut"><b id="dt">—</b></div><div id="legend"></div></div></div></div>
-<div class="grid3"><div class="card"><h3>By Crop</h3><div id="crop"></div></div><div class="card"><h3>By Product</h3><div id="product"></div></div><div class="card"><h3>Top District</h3><div id="district"></div></div></div>
-<div id="list" class="card table"><h3>Daftar Demoplot</h3><div class="tools"><select id="status" onchange="renderTable()"><option value="">All Status</option><option>Planned</option><option>On Progress</option><option>Executed</option><option>Completed</option><option>Cancelled</option></select><select id="cropf" onchange="renderTable()"><option value="">All Crop</option></select><button class="primary" onclick="load()">↻ Refresh</button><button class="primary" onclick="addDemo()">＋ Add Demoplot</button></div><div class="tablewrap"><table><thead><tr><th>Code</th><th>Crop</th><th>Product</th><th>Location</th><th>Plan</th><th>Actual</th><th>Status</th><th>DR/DMR</th></tr></thead><tbody id="body"></tbody></table></div></div>
-</section></main>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+  <div class="brand">
+    BAYER<br>
+    DEMOPLOT
+
+    <small>
+      Management System<br>
+      Real Field Data. Real Impact.
+    </small>
+  </div>
+
+  <div class="nav">
+
+    <button class="active" onclick="go('top')">
+      ⌂ &nbsp; Dashboard
+    </button>
+
+    <button onclick="go('list')">
+      ▦ &nbsp; Demoplot List
+    </button>
+
+    <button onclick="refreshData()">
+      ↻ &nbsp; Refresh Data
+    </button>
+
+    <button onclick="showToast('Map View akan kita kembangkan berikutnya.')">
+      ◎ &nbsp; Map View
+    </button>
+
+  </div>
+
+  <div class="side-note">
+    Q3 DEMOPLOT MANAGEMENT<br>
+    Field Execution Monitoring
+  </div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main id="top">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-top">
+
+      <div class="searchbox">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+          id="search"
+          placeholder="Search demoplot, farmer, product, location..."
+          oninput="renderList()"
+        >
+
+      </div>
+
+      <select id="period" class="period" onchange="render()">
+        <option value="Q3">Q3 · July–September</option>
+      </select>
+
+    </div>
+
+    <h1>Demoplot Dashboard</h1>
+
+    <p>
+      Monitoring planning, field execution and demoplot performance.
+    </p>
+
+  </section>
+
+
+  <!-- CONTENT -->
+
+  <section class="content">
+
+    <!-- KPI -->
+
+    <div class="kpis">
+
+      <div class="kpi">
+        <div class="label">TOTAL Q3 ALLOCATION</div>
+        <div class="num" id="total">—</div>
+        <div class="sub">Fixed Bayer allocation</div>
+      </div>
+
+      <div class="kpi green">
+        <div class="label">EXECUTED</div>
+        <div class="num" id="executed">—</div>
+        <div class="sub" id="execpct">—</div>
+      </div>
+
+      <div class="kpi orange">
+        <div class="label">ON PROGRESS</div>
+        <div class="num" id="progress">—</div>
+        <div class="sub">Currently being executed</div>
+      </div>
+
+      <div class="kpi red">
+        <div class="label">OUTSTANDING</div>
+        <div class="num" id="outstanding">—</div>
+        <div class="sub">Not yet executed</div>
+      </div>
+
+    </div>
+
+
+    <!-- CHARTS -->
+
+    <div class="grid">
+
+      <div class="card">
+
+        <h3>
+          Q3 Execution by Month
+        </h3>
+
+        <div class="bars" id="bars"></div>
+
+        <div style="margin-top:12px">
+
+          <span class="legendline">
+            <span class="dot" style="background:#a9bdd0"></span>
+            Planned
+          </span>
+
+          &nbsp;&nbsp;
+
+          <span class="legendline">
+            <span class="dot" style="background:#19a974"></span>
+            Executed
+          </span>
+
+          &nbsp;&nbsp;
+
+          <span class="legendline">
+            <span class="dot" style="background:#f59e0b"></span>
+            On Progress
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>Status Distribution</h3>
+
+        <div class="donutwrap">
+
+          <div class="donut" id="donut">
+            <b id="donutTotal">0</b>
+          </div>
+
+          <div id="legend"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RANKINGS -->
+
+    <div class="grid3">
+
+      <div class="card">
+
+        <h3>By Crop</h3>
+
+        <div id="crop"></div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>By Product</h3>
+
+        <div id="product"></div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>By District</h3>
+
+        <div id="district"></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- LIST -->
+
+    <div class="card listcard" id="list">
+
+      <div class="tools">
+
+        <select
+          id="statusFilter"
+          class="filter"
+          onchange="renderList()"
+        >
+          <option value="">All Status</option>
+          <option>Planned</option>
+          <option>On Progress</option>
+          <option>Executed</option>
+          <option>Completed</option>
+          <option>Cancelled</option>
+        </select>
+
+
+        <select
+          id="cropFilter"
+          class="filter"
+          onchange="renderList()"
+        >
+          <option value="">All Crop</option>
+        </select>
+
+
+        <select
+          id="monthFilter"
+          class="filter"
+          onchange="renderList()"
+        >
+          <option value="">All Plan Month</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+        </select>
+
+
+        <div class="spacer"></div>
+
+
+        <span class="countnote" id="countnote">
+          —
+        </span>
+
+
+        <button
+          class="secondary"
+          onclick="clearFilters()"
+        >
+          Reset
+        </button>
+
+
+        <button
+          class="primary"
+          onclick="refreshData()"
+        >
+          ↻ Refresh
+        </button>
+
+      </div>
+
+
+      <!-- DESKTOP TABLE -->
+
+      <div class="tablewrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Demo</th>
+              <th>Crop</th>
+              <th>Product</th>
+              <th>Location</th>
+              <th>Plan</th>
+              <th>Actual</th>
+              <th>Status</th>
+              <th>DR / DMR</th>
+              <th></th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="tbody"></tbody>
+
+        </table>
+
+      </div>
+
+
+      <!-- MOBILE -->
+
+      <div
+        id="mobilecards"
+        class="mobilecards"
+      ></div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     DETAIL MODAL
+========================= -->
+
+<div
+  class="overlay"
+  id="detailOverlay"
+  onclick="overlayClick(event,'detailOverlay')"
+>
+
+  <div class="panel">
+
+    <div class="panelhead">
+
+      <div class="paneltitle">
+
+        <div>
+          <h2 id="detailTitle">
+            Demoplot
+          </h2>
+
+          <small id="detailSub">
+            —
+          </small>
+        </div>
+
+      </div>
+
+      <button
+        class="close"
+        onclick="closePanel('detailOverlay')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="panelbody"
+      id="detailBody"
+    ></div>
+
+
+    <div class="panelfoot">
+
+      <button
+        class="secondary"
+        onclick="closePanel('detailOverlay')"
+      >
+        Tutup
+      </button>
+
+      <button
+        class="primary"
+        onclick="editCurrent()"
+      >
+        ✎ Edit Data
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     EDIT MODAL
+========================= -->
+
+<div
+  class="overlay"
+  id="editOverlay"
+  onclick="overlayClick(event,'editOverlay')"
+>
+
+  <div class="panel">
+
+    <div class="panelhead">
+
+      <div class="paneltitle">
+
+        <div>
+
+          <h2 id="editTitle">
+            Edit Demoplot
+          </h2>
+
+          <small>
+            Data master Bayer terkunci. Data lapangan dapat diedit.
+          </small>
+
+        </div>
+
+      </div>
+
+      <button
+        class="close"
+        onclick="closePanel('editOverlay')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="panelbody">
+
+      <div
+        class="formgrid"
+        id="formGrid"
+      ></div>
+
+    </div>
+
+
+    <div class="panelfoot">
+
+      <button
+        class="secondary"
+        onclick="closePanel('editOverlay')"
+      >
+        Batal
+      </button>
+
+      <button
+        class="primary"
+        id="saveBtn"
+        onclick="saveDemo()"
+      >
+        Simpan Perubahan
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
 <script>
-const API="https://script.google.com/macros/s/AKfycbzs0JhT7aIdHDfeYcrsPExqzShMqpARe80pcH_BHBK_QZwzv5iuTls_CzPFhGR_fCDuvA/exec";let DATA={d:[],p:[]};
-async function load(){if(API.includes("PASTE_")){alert("Isi URL Apps Script /exec pada variabel API di index.html.");return}const r=await fetch(API+"?action=data");DATA=await r.json();init();render()}
-function q3(){return DATA.d.filter(x=>[7,8,9].includes(Number(x.Month_Plan)))}function status(x){return x.Status||"Planned"}
-function init(){const c=[...new Set(DATA.d.map(x=>x.Crop).filter(Boolean))].sort();cropf.innerHTML='<option value="">All Crop</option>'+c.map(x=>`<option>${esc(x)}</option>`).join("")}
-function render(){const r=q3(),n=r.length,e=r.filter(x=>["Executed","Completed"].includes(status(x))).length,p=r.filter(x=>status(x)==="On Progress").length,o=Math.max(n-e-p,0);total.textContent=n;executed.textContent=e;progress.textContent=p;outstanding.textContent=o;dt.textContent=n;
-let a=n?e/n*360:0,b=n?p/n*360:0;donut.style.background=`conic-gradient(#19a974 0 ${a}deg,#f59e0b ${a}deg ${a+b}deg,#e53935 ${a+b}deg 360deg)`;legend.innerHTML=`<b style="color:#19a974">${e}</b> Executed<br><br><b style="color:#f59e0b">${p}</b> On Progress<br><br><b style="color:#e53935">${o}</b> Outstanding`;
-const ms=[7,8,9],names=["July","August","September"],mx=Math.max(1,...ms.map(m=>r.filter(x=>+x.Month_Plan===m).length));bars.innerHTML=ms.map((m,i)=>{let z=r.filter(x=>+x.Month_Plan===m),ee=z.filter(x=>["Executed","Completed"].includes(status(x))).length,pp=z.filter(x=>status(x)==="On Progress").length;return `<div style="flex:1"><div class="barbox"><div class="bar plannedbar" style="height:${z.length/mx*160}px"><span>${z.length}</span></div><div class="bar execbar" style="height:${ee/mx*160}px"><span>${ee}</span></div><div class="bar progbar" style="height:${pp/mx*160}px"><span>${pp}</span></div></div><div class="month">${names[i]}</div></div>`}).join("");rank("crop",count(r,"Crop"));rank("product",count(r,"Product"));rank("district",count(r,"District"));renderTable()}
-function count(r,k){let o={};r.forEach(x=>o[x[k]||"Unknown"]=(o[x[k]||"Unknown"]||0)+1);return Object.entries(o).sort((a,b)=>b[1]-a[1]).slice(0,7)}
-function rank(id,a){let m=a[0]?.[1]||1;document.getElementById(id).innerHTML=a.map(x=>`<div class="rank"><div class="rh"><span>${esc(x[0])}</span><b>${x[1]}</b></div><div class="track"><div class="fill" style="width:${x[1]/m*100}%"></div></div></div>`).join("")}
-function renderTable(){let r=q3(),q=(search.value||"").toLowerCase(),s=status.value,c=cropf.value;r=r.filter(x=>(!q||Object.values(x).join(" ").toLowerCase().includes(q))&&(!s||status(x)===s)&&(!c||x.Crop===c));body.innerHTML=r.slice(0,200).map(x=>`<tr><td><b>${esc(x.Code||x.Demo_ID)}</b></td><td>${esc(x.Crop)}</td><td>${esc(x.Product)}</td><td>${esc((x.District||"")+(x.Sub_District?", "+x.Sub_District:""))}</td><td>${x.Month_Plan||"—"}</td><td>${x.Month_Actual||"—"}</td><td><span class="pill ${status(x)==="Planned"?"pl":status(x)==="On Progress"?"pr":""}">${esc(status(x))}</span></td><td>${esc(x.Name_DR_DMR)}</td></tr>`).join("")}
-function addDemo(){alert("Form Add/Edit akan kita aktifkan setelah koneksi GitHub ↔ Apps Script selesai.")}
-function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+/* ==========================================================
+   CONFIGURATION
+========================================================== */
+
+const API =
+"https://script.google.com/macros/s/AKfycbzs0JhT7aIdHDfeYcrsPExqzShMqpARe80pcH_BHBK_QZwzv5iuTls_CzPFhGR_fCDuvA/exec";
+
+
+/* ==========================================================
+   GLOBAL STATE
+========================================================== */
+
+let DATA = {
+  d:[],
+  p:[]
+};
+
+let CURRENT = null;
+
+
+/* ==========================================================
+   LOCKED MASTER DATA
+   DATA INI TIDAK BOLEH DIUBAH USER
+========================================================== */
+
+const LOCKED = [
+
+  "Application_Type",
+  "Crop",
+  "Functional",
+  "Product",
+  "Name_DR_DMR"
+
+];
+
+
+/* ==========================================================
+   EDITABLE FIELD
+========================================================== */
+
+const FORM = [
+
+  ["Squad","Squad","text"],
+
+  ["Territory","Territory","text"],
+
+  ["Code","Code","text"],
+
+  ["Unit","Unit","text"],
+
+  ["District","District","text"],
+
+  ["Sub_District","Sub District","text"],
+
+  ["Month_Plan","Plan Month","month"],
+
+  ["Month_Actual","Actual Month","month"],
+
+  ["Start_Date","Tanggal Pelaksanaan","date"],
+
+  ["End_Date","Tanggal Selesai","date"],
+
+  ["Farmer","Nama Petani","text"],
+
+  ["Retailer_Buffer","Retailer / Buffer","text"],
+
+  ["Result","Result","text"],
+
+  ["Cascade_YN","Cascade","yn"],
+
+  ["Remarks","Remarks","textarea"],
+
+  ["Lead_My_Bayer_URL","Lead My Bayer URL","url"],
+
+  ["Status","Status","status"]
+
+];
+
+
+/* ==========================================================
+   DOM REFERENCES
+========================================================== */
+
+const search =
+document.getElementById("search");
+
+const statusFilter =
+document.getElementById("statusFilter");
+
+const cropFilter =
+document.getElementById("cropFilter");
+
+const monthFilter =
+document.getElementById("monthFilter");
+
+const tbody =
+document.getElementById("tbody");
+
+const mobilecards =
+document.getElementById("mobilecards");
+
+const countnote =
+document.getElementById("countnote");
+
+const bars =
+document.getElementById("bars");
+
+const donut =
+document.getElementById("donut");
+
+const donutTotal =
+document.getElementById("donutTotal");
+
+const legend =
+document.getElementById("legend");
+
+const detailTitle =
+document.getElementById("detailTitle");
+
+const detailSub =
+document.getElementById("detailSub");
+
+const detailBody =
+document.getElementById("detailBody");
+
+const formGrid =
+document.getElementById("formGrid");
+
+const editTitle =
+document.getElementById("editTitle");
+
+const saveBtn =
+document.getElementById("saveBtn");
+
+const toast =
+document.getElementById("toast");
+
+
+/* ==========================================================
+   LOAD DATA
+========================================================== */
+
+async function load(){
+
+  try{
+
+    document.body.classList.add("loading");
+
+    const response =
+      await fetch(API + "?action=data");
+
+    if(!response.ok){
+
+      throw new Error(
+        "API response " + response.status
+      );
+
+    }
+
+    const result =
+      await response.json();
+
+    DATA =
+      result || {d:[],p:[]};
+
+    initFilters();
+
+    render();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Gagal mengambil data dari Google Apps Script.\n\n" +
+      error.message
+    );
+
+  }finally{
+
+    document.body.classList.remove("loading");
+
+  }
+
+}
+
+
+/* ==========================================================
+   REFRESH
+========================================================== */
+
+async function refreshData(){
+
+  showToast("Refreshing data...");
+
+  await load();
+
+  showToast("✓ Data berhasil diperbarui");
+
+}
+
+
+/* ==========================================================
+   INITIAL FILTER
+========================================================== */
+
+function initFilters(){
+
+  const crops =
+    [
+      ...new Set(
+        DATA.d
+          .map(x => x.Crop)
+          .filter(Boolean)
+      )
+    ]
+    .sort();
+
+  cropFilter.innerHTML =
+    '<option value="">All Crop</option>' +
+
+    crops
+      .map(
+        x =>
+          `<option value="${esc(x)}">${esc(x)}</option>`
+      )
+      .join("");
+
+}
+
+
+/* ==========================================================
+   Q3 DATA
+========================================================== */
+
+function q3(){
+
+  return DATA.d.filter(
+    x =>
+      [7,8,9].includes(
+        Number(x.Month_Plan)
+      )
+  );
+
+}
+
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+function st(x){
+
+  return x.Status || "Planned";
+
+}
+
+
+/* ==========================================================
+   RENDER ALL
+========================================================== */
+
+function render(){
+
+  renderDashboard();
+
+  renderList();
+
+}
+
+
+/* ==========================================================
+   DASHBOARD
+========================================================== */
+
+function renderDashboard(){
+
+  const r = q3();
+
+  const n = r.length;
+
+  const e =
+    r.filter(
+      x =>
+        ["Executed","Completed"]
+        .includes(st(x))
+    ).length;
+
+  const p =
+    r.filter(
+      x =>
+        st(x) === "On Progress"
+    ).length;
+
+  const o =
+    Math.max(
+      n - e - p,
+      0
+    );
+
+
+  document.getElementById("total")
+    .textContent = n;
+
+  document.getElementById("executed")
+    .textContent = e;
+
+  document.getElementById("progress")
+    .textContent = p;
+
+  document.getElementById("outstanding")
+    .textContent = o;
+
+
+  document.getElementById("execpct")
+    .textContent =
+      n
+        ? Math.round(e/n*100) + "% of Q3 allocation"
+        : "—";
+
+
+  donutTotal.textContent = n;
+
+
+  /* DONUT */
+
+  const executedDeg =
+    n ? e/n*360 : 0;
+
+  const progressDeg =
+    n ? p/n*360 : 0;
+
+
+  donut.style.background =
+    `conic-gradient(
+      #19a974 0 ${executedDeg}deg,
+      #f59e0b ${executedDeg}deg ${executedDeg+progressDeg}deg,
+      #e53935 ${executedDeg+progressDeg}deg 360deg
+    )`;
+
+
+  legend.innerHTML = `
+
+    <div class="legendline">
+      <span
+        class="dot"
+        style="background:#19a974"
+      ></span>
+
+      <b>${e}</b> Executed
+    </div>
+
+
+    <div class="legendline">
+      <span
+        class="dot"
+        style="background:#f59e0b"
+      ></span>
+
+      <b>${p}</b> On Progress
+    </div>
+
+
+    <div class="legendline">
+      <span
+        class="dot"
+        style="background:#e53935"
+      ></span>
+
+      <b>${o}</b> Outstanding
+    </div>
+
+  `;
+
+
+  /* MONTHLY */
+
+  const months =
+    [7,8,9];
+
+  const names =
+    [
+      "July",
+      "August",
+      "September"
+    ];
+
+  const mx =
+    Math.max(
+      1,
+      ...months.map(
+        m =>
+          r.filter(
+            x =>
+              Number(x.Month_Plan) === m
+          ).length
+      )
+    );
+
+
+  bars.innerHTML =
+    months
+      .map(
+        (m,i)=>{
+
+          const z =
+            r.filter(
+              x =>
+                Number(x.Month_Plan) === m
+            );
+
+          const ee =
+            z.filter(
+              x =>
+                ["Executed","Completed"]
+                .includes(st(x))
+            ).length;
+
+          const pp =
+            z.filter(
+              x =>
+                st(x) === "On Progress"
+            ).length;
+
+
+          return `
+
+            <div style="flex:1">
+
+              <div class="barcol">
+
+                <div
+                  class="bar planned"
+                  style="height:${Math.max(
+                    3,
+                    z.length/mx*160
+                  )}px"
+                >
+                  <span>${z.length}</span>
+                </div>
+
+
+                <div
+                  class="bar executed"
+                  style="height:${Math.max(
+                    2,
+                    ee/mx*160
+                  )}px"
+                >
+                  <span>${ee}</span>
+                </div>
+
+
+                <div
+                  class="bar progress"
+                  style="height:${Math.max(
+                    2,
+                    pp/mx*160
+                  )}px"
+                >
+                  <span>${pp}</span>
+                </div>
+
+              </div>
+
+
+              <div class="month">
+                ${names[i]}
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+
+  /* RANKING */
+
+  rank(
+    "crop",
+    count(r,"Crop")
+  );
+
+  rank(
+    "product",
+    count(r,"Product")
+  );
+
+  rank(
+    "district",
+    count(r,"District")
+  );
+
+}
+
+
+/* ==========================================================
+   COUNT
+========================================================== */
+
+function count(r,k){
+
+  const o = {};
+
+  r.forEach(
+    x => {
+
+      const v =
+        x[k] || "Unknown";
+
+      o[v] =
+        (o[v] || 0) + 1;
+
+    }
+  );
+
+
+  return Object.entries(o)
+    .sort(
+      (a,b) =>
+        b[1]-a[1]
+    )
+    .slice(0,7);
+
+}
+
+
+/* ==========================================================
+   RANK
+========================================================== */
+
+function rank(id,a){
+
+  const m =
+    a[0]?.[1] || 1;
+
+
+  document.getElementById(id)
+    .innerHTML =
+
+      a.length
+
+      ?
+
+      a.map(
+        x => `
+
+          <div class="rank">
+
+            <div class="rankhead">
+
+              <span>
+                ${esc(x[0])}
+              </span>
+
+              <b>
+                ${x[1]}
+              </b>
+
+            </div>
+
+
+            <div class="track">
+
+              <div
+                class="fill"
+                style="width:${x[1]/m*100}%"
+              ></div>
+
+            </div>
+
+          </div>
+
+        `
+      ).join("")
+
+      :
+
+      '<div class="muted">No data</div>';
+
+}
+
+
+/* ==========================================================
+   FILTER
+========================================================== */
+
+function filtered(){
+
+  let r =
+    q3();
+
+  const q =
+    (search.value || "")
+      .trim()
+      .toLowerCase();
+
+  const s =
+    statusFilter.value;
+
+  const c =
+    cropFilter.value;
+
+  const m =
+    monthFilter.value;
+
+
+  r =
+    r.filter(
+      x =>
+
+        (
+          !q ||
+
+          Object.values(x)
+            .join(" ")
+            .toLowerCase()
+            .includes(q)
+        )
+
+        &&
+
+        (
+          !s ||
+          st(x) === s
+        )
+
+        &&
+
+        (
+          !c ||
+          x.Crop === c
+        )
+
+        &&
+
+        (
+          !m ||
+          String(x.Month_Plan) === m
+        )
+
+    );
+
+
+  return r;
+
+}
+
+
+/* ==========================================================
+   RENDER LIST
+========================================================== */
+
+function renderList(){
+
+  const r =
+    filtered();
+
+
+  countnote.textContent =
+    `${r.length} demoplot`;
+
+
+  if(!r.length){
+
+    tbody.innerHTML =
+      `
+      <tr>
+        <td
+          colspan="9"
+          class="empty"
+        >
+          Tidak ada demoplot yang cocok.
+        </td>
+      </tr>
+      `;
+
+
+    mobilecards.innerHTML =
+      `
+      <div class="empty">
+        Tidak ada demoplot yang cocok.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  tbody.innerHTML =
+    r.map(rowHtml).join("");
+
+
+  mobilecards.innerHTML =
+    r.map(cardHtml).join("");
+
+}
+
+
+/* ==========================================================
+   DESKTOP ROW
+========================================================== */
+
+function rowHtml(x){
+
+  return `
+
+    <tr
+      class="row"
+      onclick="openDetail('${esc(x.Demo_ID)}')"
+    >
+
+      <td class="code">
+        ${esc(x.Code || x.Demo_ID)}
+      </td>
+
+
+      <td>
+        ${esc(x.Crop)}
+      </td>
+
+
+      <td>
+        ${esc(x.Product)}
+      </td>
+
+
+      <td>
+        ${esc(location(x))}
+      </td>
+
+
+      <td>
+        ${monthName(x.Month_Plan)}
+      </td>
+
+
+      <td>
+        ${
+          x.Month_Actual
+          ? monthName(x.Month_Actual)
+          : "—"
+        }
+      </td>
+
+
+      <td>
+        ${pill(st(x))}
+      </td>
+
+
+      <td>
+        ${esc(x.Name_DR_DMR)}
+      </td>
+
+
+      <td>
+
+        <button
+          class="action"
+          onclick="
+            event.stopPropagation();
+            openEdit('${esc(x.Demo_ID)}')
+          "
+        >
+          Edit
+        </button>
+
+      </td>
+
+    </tr>
+
+  `;
+
+}
+
+
+/* ==========================================================
+   MOBILE CARD
+========================================================== */
+
+function cardHtml(x){
+
+  return `
+
+    <div
+      class="demo-card"
+      onclick="openDetail('${esc(x.Demo_ID)}')"
+    >
+
+      <div class="demo-top">
+
+        <div>
+
+          <div class="demo-name">
+            ${esc(x.Code || x.Demo_ID)}
+          </div>
+
+          <div class="demo-product">
+            ${esc(x.Crop || "—")}
+            ·
+            ${esc(x.Product || "—")}
+          </div>
+
+        </div>
+
+        ${pill(st(x))}
+
+      </div>
+
+
+      <div class="demo-meta">
+
+        📍 ${esc(location(x))}
+
+        <br>
+
+        👨‍🌾
+        ${esc(
+          x.Farmer ||
+          "Belum diisi"
+        )}
+
+        <br>
+
+        📅
+        Plan
+        ${monthName(x.Month_Plan)}
+
+        ·
+
+        Actual
+        ${
+          x.Month_Actual
+          ? monthName(x.Month_Actual)
+          : "—"
+        }
+
+      </div>
+
+
+      <div class="demo-bottom">
+
+        <span class="muted">
+          DR:
+          ${esc(x.Name_DR_DMR || "—")}
+        </span>
+
+
+        <button
+          class="action"
+          onclick="
+            event.stopPropagation();
+            openEdit('${esc(x.Demo_ID)}')
+          "
+        >
+          Edit
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ==========================================================
+   LOCATION
+========================================================== */
+
+function location(x){
+
+  return [
+    x.Sub_District,
+    x.District,
+    x.Territory
+  ]
+  .filter(Boolean)
+  .join(", ")
+
+  ||
+
+  "Lokasi belum diisi";
+
+}
+
+
+/* ==========================================================
+   STATUS PILL
+========================================================== */
+
+function pill(s){
+
+  let c;
+
+  if(
+    s === "Executed" ||
+    s === "Completed"
+  ){
+
+    c = "execpill";
+
+  }
+
+  else if(
+    s === "On Progress"
+  ){
+
+    c = "progpill";
+
+  }
+
+  else if(
+    s === "Cancelled"
+  ){
+
+    c = "cancelpill";
+
+  }
+
+  else{
+
+    c = "plannedpill";
+
+  }
+
+
+  return `
+    <span class="pill ${c}">
+      ${esc(s)}
+    </span>
+  `;
+
+}
+
+
+/* ==========================================================
+   DETAIL
+========================================================== */
+
+function openDetail(id){
+
+  CURRENT =
+    DATA.d.find(
+      x =>
+        String(x.Demo_ID)
+        ===
+        String(id)
+    );
+
+
+  if(!CURRENT)return;
+
+
+  detailTitle.textContent =
+    CURRENT.Code ||
+    CURRENT.Demo_ID;
+
+
+  detailSub.textContent =
+    `${CURRENT.Demo_ID}
+     ·
+     ${CURRENT.Name_DR_DMR || "DR/DMR belum diisi"}`;
+
+
+  detailBody.innerHTML =
+    detailHtml(CURRENT);
+
+
+  document
+    .getElementById("detailOverlay")
+    .classList.add("show");
+
+}
+
+
+/* ==========================================================
+   DETAIL HTML
+========================================================== */
+
+function detailHtml(x){
+
+  const lead =
+    x.Lead_My_Bayer_URL
+
+    ?
+
+    `
+      <a
+        class="url"
+        href="${esc(x.Lead_My_Bayer_URL)}"
+        target="_blank"
+        rel="noopener"
+      >
+        Open Lead My Bayer ↗
+      </a>
+    `
+
+    :
+
+    `
+      <span class="muted">
+        Belum tersedia
+      </span>
+    `;
+
+
+  return `
+
+    <div class="detailhero">
+
+
+      <div class="infohero">
+
+        <div class="big">
+          ${esc(x.Crop || "—")}
+        </div>
+
+        <div class="meta">
+
+          ${esc(x.Product || "—")}
+          ·
+          ${esc(x.Functional || "—")}
+
+        </div>
+
+
+        <div class="chips">
+
+          <span class="chip">
+            ${esc(
+              x.Application_Type || "—"
+            )}
+          </span>
+
+
+          <span class="chip">
+            ${esc(st(x))}
+          </span>
+
+
+          <span class="chip">
+            DR:
+            ${esc(
+              x.Name_DR_DMR || "—"
+            )}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary">
+
+        <div class="sumitem">
+
+          <label>
+            Farmer
+          </label>
+
+          <b>
+            ${esc(
+              x.Farmer ||
+              "Belum diisi"
+            )}
+          </b>
+
+        </div>
+
+
+        <div class="sumitem">
+
+          <label>
+            Pelaksanaan
+          </label>
+
+          <b>
+            ${
+              x.Start_Date
+              ? formatDate(x.Start_Date)
+              : "Belum diisi"
+            }
+          </b>
+
+        </div>
+
+
+        <div class="sumitem">
+
+          <label>
+            Location
+          </label>
+
+          <b>
+            ${esc(location(x))}
+          </b>
+
+        </div>
+
+
+        <div class="sumitem">
+
+          <label>
+            Actual Month
+          </label>
+
+          <b>
+            ${
+              x.Month_Actual
+              ? monthName(x.Month_Actual)
+              : "Belum diisi"
+            }
+          </b>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="sectiontitle">
+      Data Master · Locked
+    </div>
+
+
+    <div class="detailgrid">
+
+      ${detailItem(
+        "Tipe Aplikasi",
+        x.Application_Type
+      )}
+
+      ${detailItem(
+        "Crop",
+        x.Crop
+      )}
+
+      ${detailItem(
+        "Functional",
+        x.Functional
+      )}
+
+      ${detailItem(
+        "Product",
+        x.Product
+      )}
+
+      ${detailItem(
+        "DR / DMR",
+        x.Name_DR_DMR
+      )}
+
+    </div>
+
+
+    <div class="sectiontitle">
+      Data Lapangan
+    </div>
+
+
+    <div class="detailgrid">
+
+      ${detailItem(
+        "Squad",
+        x.Squad
+      )}
+
+      ${detailItem(
+        "Territory",
+        x.Territory
+      )}
+
+      ${detailItem(
+        "District",
+        x.District
+      )}
+
+      ${detailItem(
+        "Sub District",
+        x.Sub_District
+      )}
+
+      ${detailItem(
+        "Plan Month",
+        monthName(x.Month_Plan)
+      )}
+
+      ${detailItem(
+        "Actual Month",
+        x.Month_Actual
+        ? monthName(x.Month_Actual)
+        : "—"
+      )}
+
+      ${detailItem(
+        "Tanggal Pelaksanaan",
+        x.Start_Date
+        ? formatDate(x.Start_Date)
+        : "—"
+      )}
+
+      ${detailItem(
+        "Tanggal Selesai",
+        x.End_Date
+        ? formatDate(x.End_Date)
+        : "—"
+      )}
+
+      ${detailItem(
+        "Retailer / Buffer",
+        x.Retailer_Buffer
+      )}
+
+      ${detailItem(
+        "Result",
+        x.Result
+      )}
+
+      ${detailItem(
+        "Cascade",
+        x.Cascade_YN
+      )}
+
+      ${detailItem(
+        "Unit",
+        x.Unit
+      )}
+
+    </div>
+
+
+    <div class="sectiontitle">
+      Remarks & Link
+    </div>
+
+
+    <div class="sumitem">
+
+      <b>
+        ${esc(
+          x.Remarks ||
+          "Tidak ada remarks"
+        )}
+      </b>
+
+
+      <div style="margin-top:10px">
+        ${lead}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ==========================================================
+   DETAIL ITEM
+========================================================== */
+
+function detailItem(k,v){
+
+  return `
+
+    <div class="detailitem">
+
+      <label>
+        ${esc(k)}
+      </label>
+
+      <b>
+        ${esc(v ?? "—") || "—"}
+      </b>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ==========================================================
+   EDIT CURRENT
+========================================================== */
+
+function editCurrent(){
+
+  if(!CURRENT)return;
+
+  closePanel(
+    "detailOverlay"
+  );
+
+  openEdit(CURRENT);
+
+}
+
+
+/* ==========================================================
+   OPEN EDIT
+========================================================== */
+
+function openEdit(id){
+
+  const x =
+    typeof id === "object"
+
+      ?
+
+      id
+
+      :
+
+      DATA.d.find(
+        r =>
+          String(r.Demo_ID)
+          ===
+          String(id)
+      );
+
+
+  if(!x)return;
+
+
+  CURRENT = x;
+
+
+  editTitle.textContent =
+    "Edit Demoplot · " +
+    (x.Code || x.Demo_ID);
+
+
+  formGrid.innerHTML =
+
+    LOCKED
+      .map(
+        k =>
+          lockedHtml(
+            k,
+            label(k),
+            x[k]
+          )
+      )
+      .join("")
+
+    +
+
+    FORM
+      .map(
+        f =>
+          fieldHtml(
+            f,
+            x[f[0]]
+          )
+      )
+      .join("");
+
+
+  document
+    .getElementById("editOverlay")
+    .classList.add("show");
+
+}
+
+
+/* ==========================================================
+   LOCKED FIELD
+========================================================== */
+
+function lockedHtml(k,l,v){
+
+  return `
+
+    <div class="field">
+
+      <label>
+        ${esc(l)} 🔒
+      </label>
+
+      <input
+        class="locked"
+        value="${esc(v || "—")}"
+        disabled
+      >
+
+      <span class="locknote">
+        Data master Bayer — tidak dapat diubah
+      </span>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ==========================================================
+   FIELD GENERATOR
+========================================================== */
+
+function fieldHtml(f,v){
+
+  const [
+    k,
+    l,
+    t
+  ] = f;
+
+
+  v = v ?? "";
+
+
+  let e;
+
+
+  /* MONTH */
+
+  if(t === "month"){
+
+    e = `
+
+      <select id="f_${k}">
+
+        <option value="">
+          —
+        </option>
+
+        ${Array.from(
+          {length:12},
+          (_,i) => `
+
+            <option
+              value="${i+1}"
+              ${
+                Number(v) === i+1
+                ? "selected"
+                : ""
+              }
+            >
+              ${monthName(i+1)}
+            </option>
+
+          `
+        ).join("")}
+
+      </select>
+
+    `;
+
+  }
+
+
+  /* YES / NO */
+
+  else if(t === "yn"){
+
+    e = `
+
+      <select id="f_${k}">
+
+        <option value="">
+          —
+        </option>
+
+        <option
+          value="Y"
+          ${
+            v === "Y"
+            ? "selected"
+            : ""
+          }
+        >
+          Y
+        </option>
+
+        <option
+          value="N"
+          ${
+            v === "N"
+            ? "selected"
+            : ""
+          }
+        >
+          N
+        </option>
+
+      </select>
+
+    `;
+
+  }
+
+
+  /* STATUS */
+
+  else if(t === "status"){
+
+    e = `
+
+      <select id="f_${k}">
+
+        ${
+          [
+            "Planned",
+            "On Progress",
+            "Executed",
+            "Completed",
+            "Cancelled"
+          ]
+
+          .map(
+            o =>
+              `
+              <option
+                ${
+                  v === o
+                  ? "selected"
+                  : ""
+                }
+              >
+                ${o}
+              </option>
+              `
+          )
+
+          .join("")
+        }
+
+      </select>
+
+    `;
+
+  }
+
+
+  /* TEXTAREA */
+
+  else if(t === "textarea"){
+
+    e = `
+
+      <textarea
+        id="f_${k}"
+      >${esc(v)}</textarea>
+
+    `;
+
+  }
+
+
+  /* NORMAL */
+
+  else{
+
+    e = `
+
+      <input
+        id="f_${k}"
+        type="${t}"
+        value="${esc(v)}"
+      >
+
+    `;
+
+  }
+
+
+  return `
+
+    <div
+      class="field
+      ${
+        t === "textarea"
+        ? "full"
+        : ""
+      }"
+    >
+
+      <label>
+        ${esc(l)}
+      </label>
+
+      ${e}
+
+    </div>
+
+  `;
+
+}
+
+
+/* ==========================================================
+   SAVE DEMOPLOT
+========================================================== */
+
+async function saveDemo(){
+
+  if(!CURRENT)return;
+
+
+  saveBtn.disabled = true;
+
+  saveBtn.textContent =
+    "Menyimpan...";
+
+
+  const payload = {
+
+    action:"save",
+
+    data:{
+
+      Demo_ID:
+        CURRENT.Demo_ID
+
+    }
+
+  };
+
+
+  /*
+    HANYA FIELD FORM YANG
+    DIKIRIM KE BACKEND.
+
+    MASTER DATA TIDAK DIKIRIM
+    SEHINGGA TIDAK BISA DIUBAH
+    MELALUI FORM INI.
+  */
+
+  FORM.forEach(
+    f => {
+
+      const e =
+        document.getElementById(
+          "f_" + f[0]
+        );
+
+
+      if(e){
+
+        payload.data[f[0]] =
+          e.value;
+
+      }
+
+    }
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        API,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(payload)
+        }
+      );
+
+
+    const out =
+      await response.json();
+
+
+    if(!out.ok){
+
+      throw new Error(
+        out.error ||
+        "Gagal menyimpan"
+      );
+
+    }
+
+
+    const id =
+      CURRENT.Demo_ID;
+
+
+    closePanel(
+      "editOverlay"
+    );
+
+
+    await load();
+
+
+    openDetail(id);
+
+
+    showToast(
+      "✓ Perubahan tersimpan"
+    );
+
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "Gagal menyimpan:\n\n" +
+      e.message
+    );
+
+  }
+
+
+  finally{
+
+    saveBtn.disabled = false;
+
+    saveBtn.textContent =
+      "Simpan Perubahan";
+
+  }
+
+}
+
+
+/* ==========================================================
+   RESET FILTER
+========================================================== */
+
+function clearFilters(){
+
+  search.value = "";
+
+  statusFilter.value = "";
+
+  cropFilter.value = "";
+
+  monthFilter.value = "";
+
+  renderList();
+
+}
+
+
+/* ==========================================================
+   CLOSE PANEL
+========================================================== */
+
+function closePanel(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* ==========================================================
+   CLICK OUTSIDE MODAL
+========================================================== */
+
+function overlayClick(event,id){
+
+  if(
+    event.target.id === id
+  ){
+
+    closePanel(id);
+
+  }
+
+}
+
+
+/* ==========================================================
+   NAVIGATION
+========================================================== */
+
+function go(id){
+
+  document
+    .getElementById(id)
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* ==========================================================
+   TOAST
+========================================================== */
+
+function showToast(t){
+
+  toast.textContent = t;
+
+  toast.classList.add("show");
+
+
+  setTimeout(
+    () =>
+      toast.classList.remove("show"),
+    2600
+  );
+
+}
+
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+function label(k){
+
+  return {
+
+    Application_Type:
+      "Tipe Aplikasi",
+
+    Crop:
+      "Crop",
+
+    Functional:
+      "Functional",
+
+    Product:
+      "Product",
+
+    Name_DR_DMR:
+      "DR / DMR"
+
+  }[k] || k;
+
+}
+
+
+/* ==========================================================
+   MONTH NAME
+========================================================== */
+
+function monthName(n){
+
+  return [
+
+    "",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+
+  ][Number(n)] || "—";
+
+}
+
+
+/* ==========================================================
+   DATE FORMAT
+========================================================== */
+
+function formatDate(v){
+
+  if(!v)return "—";
+
+
+  const d =
+    new Date(v);
+
+
+  if(isNaN(d))
+    return v;
+
+
+  return d.toLocaleDateString(
+    "id-ID",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+/* ==========================================================
+   HTML ESCAPE
+========================================================== */
+
+function esc(v){
+
+  return String(
+    v ?? ""
+  ).replace(
+    /[&<>"']/g,
+    m =>
+      ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[m])
+  );
+
+}
+
+
+/* ==========================================================
+   START
+========================================================== */
+
 load();
-</script></body></html>
+
+</script>
+
+</body>
+</html>
