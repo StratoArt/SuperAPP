@@ -8,7 +8,10 @@
 <meta name="theme-color" content="#071b2f">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Demoplot">
+<meta name="apple-mobile-web-app-title" content="DEMOPLOT">
+<meta name="application-name" content="DEMOPLOT">
+<meta name="description" content="DEMOPLOT Management System — Monitor · Execute · Report">
+<link rel="icon" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
@@ -25,14 +28,87 @@ table{width:100%;border-collapse:collapse;min-width:1050px}th,td{padding:11px 9p
 .mobile-list{display:none;gap:9px;flex-direction:column}.demo{background:#fff;border-radius:15px;padding:14px;box-shadow:0 4px 16px #0a233c0d}.demo h3{font-size:13px;margin:5px 0}.meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.meta div{background:#f7f9fb;padding:8px;border-radius:8px}.meta small{display:block;color:var(--m);font-size:8px}.meta b{font-size:10px}.acts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
 .modal{position:fixed;inset:0;background:#02111e99;display:none;align-items:center;justify-content:center;padding:20px;z-index:30}.modal.show{display:flex}.sheet{background:#fff;width:min(850px,100%);max-height:92vh;overflow:auto;border-radius:18px}.mh{padding:15px 18px;border-bottom:1px solid var(--l);display:flex;justify-content:space-between}.mb{padding:18px}.mf{padding:12px 18px;border-top:1px solid var(--l);display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff}.close{border:0;border-radius:50%;width:32px;height:32px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:10px;font-weight:800;color:#52616e}.lock{background:#f4f6f8}.workflow{padding:12px;background:#fafcfd;border:1px solid var(--l);border-radius:11px;margin-bottom:15px}.stages{display:flex;gap:6px;overflow:auto}.stage{border:1px solid #d9e1e7;background:#fff;border-radius:8px;padding:8px 10px;font-size:10px;font-weight:800;white-space:nowrap}.stage.active{background:var(--b);color:#fff}.quick{display:flex;gap:6px;overflow:auto;margin-top:9px}.toast{position:fixed;right:18px;bottom:18px;background:#10293f;color:#fff;padding:12px 14px;border-radius:10px;opacity:0;transform:translateY(15px);transition:.2s;z-index:100}.toast.show{opacity:1;transform:none}.toast.err{background:#b92e2e}.bottom{display:none}
 @media(max-width:800px){body{padding-bottom:75px}.sidebar{display:none}.main{margin:0;width:100%}.top{height:64px;padding:8px 14px;background:linear-gradient(135deg,var(--n),#0b3455);color:#fff}.title{font-size:17px}.sub{color:#ffffffa8}.api{display:none}.top button{background:#ffffff1f;color:#fff;border-color:#ffffff30}.content{padding:14px 12px 28px}.bar{border:0;box-shadow:none;background:transparent;padding:0;overflow:auto;flex-wrap:nowrap}.bar select{min-width:110px}.qs{display:flex;overflow:auto;margin:0 -12px 14px;padding:2px 12px 5px}.q{min-width:125px;flex-shrink:0}.q strong{font-size:25px}.kpis{grid-template-columns:1fr 1fr;gap:9px}.kpi{border:0;padding:14px}.kpi:last-child{grid-column:1/-1}.grid2,.equal{display:block}.card{border:0;margin-bottom:11px;padding:15px}.chart{height:225px}.frow{grid-template-columns:75px 1fr 28px;font-size:9px}.fbar{height:23px}.table-wrap{display:none}.mobile-list{display:flex}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.modal{padding:0;align-items:flex-end}.sheet{width:100%;max-height:94vh;border-radius:20px 20px 0 0}.mb{padding:14px}.workflow{position:sticky;top:0;background:#fff;z-index:2;margin:-14px -14px 14px;border-radius:0 0 12px 12px}.bottom{position:fixed;display:grid;grid-template-columns:1fr 1fr;left:0;right:0;bottom:0;background:#fffffff5;border-top:1px solid var(--l);padding:7px 12px calc(7px + env(safe-area-inset-bottom));z-index:20}.bottom button{border:0;background:transparent;min-height:50px;border-radius:10px;color:#71808c;font-weight:700;font-size:9px}.bottom button.active{color:var(--b);background:#eef6fc}.bottom span{display:block;font-size:19px;margin-bottom:3px}}
+
+/* DEMOPLOT brand / PWA V3 */
+.brand-logo{width:44px;height:44px;object-fit:contain;background:#fff;border-radius:12px;padding:5px;flex:none}
+.top-brand{display:flex;align-items:center;gap:10px}
+.top-logo{display:none;width:38px;height:38px;object-fit:contain;background:#fff;border-radius:10px;padding:4px}
+.top-actions{display:flex;align-items:center;gap:8px}
+.install-btn{display:none;border:0!important;background:linear-gradient(135deg,#0b86d8,#18b5e6)!important;color:#fff!important;font-weight:800;box-shadow:0 5px 15px #008bd733}
+.install-btn.ready{display:inline-flex}
+.mobile-hero{display:none}
+.hero-install{border:0;background:#0a87d7;color:#fff;border-radius:11px;padding:10px 14px;font-weight:800;box-shadow:0 6px 16px #087fc72b}
+@media(max-width:800px){
+  body{background:#f4f7fa;padding-bottom:92px}
+  .top{height:72px;padding:8px 14px;background:linear-gradient(135deg,#061b30 0%,#083b5e 65%,#086c9c 100%);box-shadow:0 6px 22px #06213b22}
+  .top-brand{min-width:0}
+  .top-logo{display:block}
+  .title{font-size:15px;line-height:1.15}
+  .sub{font-size:9px;margin-top:4px;color:#d8e9f4}
+  .top-actions{gap:5px}
+  .top-actions .api{display:none}
+  .refresh-btn{font-size:0!important;width:36px;height:36px;padding:0!important;border-radius:10px!important;background:#ffffff18!important;color:#fff!important;border:1px solid #ffffff22!important}
+  .refresh-btn::after{content:"↻";font-size:18px}
+  .install-btn{display:none!important;font-size:9px;padding:8px 9px!important}
+  .install-btn.ready{display:inline-flex!important}
+  .content{padding:10px 12px 24px}
+  .mobile-hero{display:flex;align-items:center;gap:11px;padding:12px 4px 14px}
+  .hero-logo-wrap{width:49px;height:49px;background:#fff;border-radius:14px;box-shadow:0 5px 16px #0b355218;padding:5px;flex:none}
+  .hero-logo-wrap img{width:100%;height:100%;object-fit:contain}
+  .hero-copy{min-width:0;flex:1}
+  .hero-title{font-size:17px;font-weight:950;letter-spacing:.8px;color:#09253d}
+  .hero-sub{font-size:9px;color:#71808c;margin-top:1px}
+  .hero-tag{font-size:8px;color:#0b82ca;font-weight:800;margin-top:5px}
+  .hero-install{display:none}
+  .bar{margin-bottom:11px}
+  .qs{margin-bottom:11px}
+  .q{border-radius:16px;box-shadow:0 4px 16px #0a233c0a}
+  .kpi{box-shadow:0 4px 15px #0a233c0a;border-radius:15px}
+  .card{box-shadow:0 4px 18px #0a233c0a;border:1px solid #e8edf2}
+  .bottom{height:auto;padding:6px 14px calc(7px + env(safe-area-inset-bottom));background:#fffffff7;backdrop-filter:blur(16px);box-shadow:0 -5px 20px #092a4214}
+  .bottom button{min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;color:#7a8792}
+  .bottom button.active{color:#0785d3;background:#eaf6fd}
+  .bottom .nav-icon{font-size:21px;line-height:20px}
+  .bottom b{font-size:9px;line-height:12px}
+  .bottom small{font-size:7px;color:inherit;opacity:.72}
+}
+@media(min-width:801px){
+  .hero-install{display:none}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="sidebar"><div class="brand"><div class="logo">DP</div><div><b>DEMOPLOT</b><small>MANAGEMENT SYSTEM</small></div></div><div class="nav"><button class="active" onclick="page('dash',this)">▦ &nbsp; Dashboard</button><button onclick="page('input',this)">✎ &nbsp; Input Data</button></div></aside>
+<aside class="sidebar"><div class="brand"><img class="brand-logo" src="./logo-symbol.png" alt="DEMOPLOT"><div><b>DEMOPLOT</b><small>MANAGEMENT SYSTEM</small></div></div><div class="nav"><button class="active" onclick="page('dash',this)">▦ &nbsp; Dashboard</button><button onclick="page('input',this)">✎ &nbsp; Input Data</button></div></aside>
 <main class="main">
-<header class="top"><div><div class="title" id="pt">Demoplot Dashboard</div><div class="sub" id="ps">Monitoring & reporting</div></div><div><span class="api"><i class="dot" id="dot"></i><span id="apiText">Connecting...</span></span><button onclick="load()">↻ Refresh</button></div></header>
+
+<header class="top">
+  <div class="top-brand">
+    <img src="./logo-symbol.png" alt="DEMOPLOT" class="top-logo">
+    <div>
+      <div class="title" id="pt">Demoplot Dashboard</div>
+      <div class="sub" id="ps">Monitor · Execute · Report</div>
+    </div>
+  </div>
+  <div class="top-actions">
+    <span class="api"><i class="dot" id="dot"></i><span id="apiText">Connecting...</span></span>
+    <button id="installBtn" class="install-btn" onclick="installApp()">＋ Install App</button>
+    <button class="refresh-btn" onclick="load()">↻ Refresh</button>
+  </div>
+</header>
+
 <div class="content">
+<div class="mobile-hero">
+  <div class="hero-logo-wrap"><img src="./logo-symbol.png" alt="DEMOPLOT"></div>
+  <div class="hero-copy">
+    <div class="hero-title">DEMOPLOT</div>
+    <div class="hero-sub">Management System</div>
+    <div class="hero-tag">From Allocation to Impact</div>
+  </div>
+  <button class="hero-install" id="heroInstallBtn" onclick="installApp()">Install App</button>
+</div>
+
 <section id="dash">
 <div class="bar"><select id="year" onchange="dashboard()"></select><select id="quarter" onchange="dashboard()"><option value="ALL">All Year</option><option>Q1</option><option>Q2</option><option>Q3</option><option>Q4</option></select></div>
 <div class="qs" id="qs"></div>
@@ -51,7 +127,16 @@ table{width:100%;border-collapse:collapse;min-width:1050px}th,td{padding:11px 9p
 </section>
 </div></main></div>
 
-<nav class="bottom"><button class="active" onclick="mobilePage('dash',this)"><span>▦</span>Dashboard</button><button onclick="mobilePage('input',this)"><span>✎</span>Input Data</button></nav>
+
+<nav class="bottom">
+  <button class="active" onclick="mobilePage('dash',this)">
+    <span class="nav-icon">▦</span><b>Dashboard</b><small>Overview</small>
+  </button>
+  <button onclick="mobilePage('input',this)">
+    <span class="nav-icon">✎</span><b>Input Data</b><small>Update</small>
+  </button>
+</nav>
+
 
 <div class="modal" id="detailModal"><div class="sheet"><div class="mh"><b>Demoplot Detail</b><button class="close" onclick="closeM('detailModal')">×</button></div><div class="mb" id="detail"></div></div></div>
 <div class="modal" id="editModal"><div class="sheet"><div class="mh"><div><b>Update Demoplot</b><div class="sub" id="es"></div></div><button class="close" onclick="closeM('editModal')">×</button></div><div class="mb"><div class="workflow"><b>Progress Stage</b><div class="stages" id="stages"></div><div class="quick"><button class="btn secondary" onclick="quick('Register')">Register</button><button class="btn secondary" onclick="quick('Visit 1')">Visit 1</button><button class="btn secondary" onclick="quick('Visit 2')">Visit 2</button><button class="btn secondary" onclick="quick('Final Visit')">Final Visit</button><button class="btn green" onclick="quick('Submitted')">Submit</button><button class="btn green" onclick="quick('Acc TM')">Acc TM</button></div></div><div class="fields" id="fields"></div></div><div class="mf"><button class="btn secondary" onclick="closeM('editModal')">Cancel</button><button class="btn primary" id="save" onclick="save()">Save Changes</button></div></div></div>
@@ -62,6 +147,60 @@ const API="https://script.google.com/macros/s/AKfycbzs0JhT7aIdHDfeYcrsPExqzShqMq
 let DATA=[],edit=null,charts={};
 const F=[["Squad","Squad","text"],["Territory","Territory","text"],["Code","Code","text"],["Unit","Unit","text"],["District","District","text"],["Sub_District","Sub District","text"],["Month_Plan","Plan Month","month"],["Month_Actual","Actual Month","month"],["Start_Date","Tanggal Pelaksanaan","date"],["End_Date","Tanggal Selesai","date"],["Farmer","Nama Petani","text"],["Retailer_Buffer","Retailer / Buffer","text"],["Result","Result","text"],["Cascade_YN","Cascade","yn"],["Remarks","Remarks","textarea"],["Lead_My_Bayer_URL","Lead My Bayer URL","url"],["Progress_Stage","Progress Stage","stage"],["Status","Status","status"]];
 const SINGLE=["Planning","Register","Final Visit","Submitted","Acc TM"],SEASONAL=["Planning","Register","Visit 1","Visit 2","Final Visit","Submitted","Acc TM"];
+
+/* PWA install handling */
+let deferredInstallPrompt = null;
+let isInstalled = false;
+
+function isStandalone(){
+  return window.matchMedia('(display-mode: standalone)').matches ||
+         window.navigator.standalone === true;
+}
+function setInstallUI(show){
+  const a=document.getElementById('installBtn');
+  const b=document.getElementById('heroInstallBtn');
+  if(!a || !b) return;
+  if(show && !isStandalone()){
+    a.classList.add('ready');
+    b.style.display='block';
+  }else{
+    a.classList.remove('ready');
+    b.style.display='none';
+  }
+}
+async function installApp(){
+  if(isStandalone()){
+    toast('DEMOPLOT sudah ter-install');
+    return;
+  }
+  if(!deferredInstallPrompt){
+    toast('Install belum tersedia. Di Chrome Android buka menu ⋮ lalu pilih "Install app" / "Tambahkan ke layar utama".', true);
+    return;
+  }
+  deferredInstallPrompt.prompt();
+  const choice=await deferredInstallPrompt.userChoice;
+  if(choice.outcome==='accepted'){
+    deferredInstallPrompt=null;
+    setInstallUI(false);
+    toast('DEMOPLOT sedang di-install');
+  }
+}
+window.addEventListener('beforeinstallprompt', e=>{
+  e.preventDefault();
+  deferredInstallPrompt=e;
+  setInstallUI(true);
+});
+window.addEventListener('appinstalled', ()=>{
+  isInstalled=true;
+  deferredInstallPrompt=null;
+  setInstallUI(false);
+  toast('DEMOPLOT berhasil di-install');
+});
+window.addEventListener('DOMContentLoaded', ()=>{
+  if(isStandalone()) setInstallUI(false);
+  else setInstallUI(true); // Show button as a useful fallback even before Chrome exposes the prompt.
+});
+
 document.addEventListener("DOMContentLoaded",load);
 async function load(){try{setApi("Connecting...",0);let r=await fetch(API+"?action=data&t="+Date.now(),{cache:"no-store"});let j=JSON.parse(await r.text());DATA=Array.isArray(j)?j:(j.d||j.data||j.rows||[]);setApi("Connected · "+DATA.length+" rows",1);years();dashboard();inputTable();toast(DATA.length+" data berhasil dimuat")}catch(e){console.error(e);setApi("API Error",2);toast("Gagal memuat data Google: "+e.message,1)}}
 function setApi(t,s){apiText.textContent=t;dot.className="dot "+(s===1?"ok":s===2?"err":"")}

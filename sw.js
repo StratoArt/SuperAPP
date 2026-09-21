@@ -1,4 +1,42 @@
-const CACHE="demoplot-v1";const FILES=["./","./index.html","./manifest.json"];
-self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)));self.skipWaiting()});
-self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))));self.clients.claim()});
-self.addEventListener("fetch",e=>{if(e.request.url.includes("script.google.com")){e.respondWith(fetch(e.request));return}e.respondWith(fetch(e.request).then(r=>{let c=r.clone();caches.open(CACHE).then(x=>x.put(e.request,c));return r}).catch(()=>caches.match(e.request)))});
+const CACHE = "demoplot-v3";
+const APP = [
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./logo-demoplot.png",
+  "./logo-symbol.png",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/icon-maskable-512.png"
+];
+
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(CACHE).then(c => c.addAll(APP)).then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+    ).then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", event => {
+  const url = new URL(event.request.url);
+
+  // Never cache Google Apps Script API calls.
+  if (url.hostname.includes("script.google.com")) return;
+
+  if (event.request.method !== "GET") return;
+
+  event.respondWith(
+    fetch(event.request).then(response => {
+      const copy = response.clone();
+      caches.open(CACHE).then(c => c.put(event.request, copy));
+      return response;
+    }).catch(() => caches.match(event.request).then(r => r || caches.match("./index.html")))
+  );
+});

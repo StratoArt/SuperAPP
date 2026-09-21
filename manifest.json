@@ -1,13 +1,15 @@
 {
-  "name": "Demoplot Management System",
-  "short_name": "Demoplot",
-  "description": "Demoplot monitoring, execution and reporting system",
-  "start_url": "./index.html",
+  "id": "./",
+  "name": "DEMOPLOT Management System",
+  "short_name": "DEMOPLOT",
+  "description": "DEMOPLOT Management System — Monitor · Execute · Report",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "background_color": "#071b2f",
   "theme_color": "#071b2f",
+  "lang": "id-ID",
   "icons": [
     {
       "src": "./icons/icon-192.png",
