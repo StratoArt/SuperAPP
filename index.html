@@ -24,7 +24,7 @@ main{margin-left:235px}.hero{padding:24px 32px 30px;background:linear-gradient(1
 <div id="list" class="card table"><h3>Daftar Demoplot</h3><div class="tools"><select id="status" onchange="renderTable()"><option value="">All Status</option><option>Planned</option><option>On Progress</option><option>Executed</option><option>Completed</option><option>Cancelled</option></select><select id="cropf" onchange="renderTable()"><option value="">All Crop</option></select><button class="primary" onclick="load()">↻ Refresh</button><button class="primary" onclick="addDemo()">＋ Add Demoplot</button></div><div class="tablewrap"><table><thead><tr><th>Code</th><th>Crop</th><th>Product</th><th>Location</th><th>Plan</th><th>Actual</th><th>Status</th><th>DR/DMR</th></tr></thead><tbody id="body"></tbody></table></div></div>
 </section></main>
 <script>
-const API="PASTE_APPS_SCRIPT_WEB_APP_URL_HERE";let DATA={d:[],p:[]};
+const API="https://script.google.com/macros/s/AKfycbzs0JhT7aIdHDfeYcrsPExqzShMqpARe80pcH_BHBK_QZwzv5iuTls_CzPFhGR_fCDuvA/exec";let DATA={d:[],p:[]};
 async function load(){if(API.includes("PASTE_")){alert("Isi URL Apps Script /exec pada variabel API di index.html.");return}const r=await fetch(API+"?action=data");DATA=await r.json();init();render()}
 function q3(){return DATA.d.filter(x=>[7,8,9].includes(Number(x.Month_Plan)))}function status(x){return x.Status||"Planned"}
 function init(){const c=[...new Set(DATA.d.map(x=>x.Crop).filter(Boolean))].sort();cropf.innerHTML='<option value="">All Crop</option>'+c.map(x=>`<option>${esc(x)}</option>`).join("")}
