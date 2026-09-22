@@ -1,4 +1,4 @@
-DEMOPLOT PWA V3
+DEMOPLOT PWA V4
 ================
 
 Isi:
@@ -33,3 +33,9 @@ Deploy:
 Catatan:
 - API Google Apps Script tidak diubah.
 - Semua 40 allocation tetap fixed.
+
+Perbaikan V4:
+- Bottom navigation memakai pointer event + click fallback.
+- Touch target diperbesar dan diprioritaskan di atas layer lain.
+- Text selection / long-press translation pada bottom nav dinonaktifkan.
+- Service worker cache dinaikkan ke demoplot-v4.

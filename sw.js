@@ -1,4 +1,4 @@
-const CACHE = "demoplot-v3";
+const CACHE = "demoplot-v4";
 const APP = [
   "./",
   "./index.html",
@@ -26,10 +26,7 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
-
-  // Never cache Google Apps Script API calls.
   if (url.hostname.includes("script.google.com")) return;
-
   if (event.request.method !== "GET") return;
 
   event.respondWith(
